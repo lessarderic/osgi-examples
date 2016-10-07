@@ -2,6 +2,7 @@
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
           name="data-management-${project.version}">
     <repository>mvn:org.apache.cxf.dosgi/cxf-dosgi/2.0.0/xml/features</repository>
+    <repository>mvn:org.ops4j.pax.jdbc/pax-jdbc-features/0.8.0/xml/features</repository>
 
     <!-- feature:repo-add mvn:org.codice.data/data-management-features/0.1-SNAPSHOT/xml/features -->
 
@@ -20,7 +21,16 @@
 
     <feature name="data-management-mysql" version="${project.version}">
         <feature>data-management-common</feature>
+        <feature>transaction</feature>
+        <feature>jndi</feature>
+        <feature>pax-jdbc-h2</feature>
+        <feature>pax-jdbc-pool-dbcp2</feature>
+        <feature>pax-jdbc-config</feature>
+        <feature>pax-jdbc-mysql</feature>
         <bundle>mvn:org.codice.data/data-management-rest-mysql/${project.version}</bundle>
+        <configfile finalname="/etc/org.ops4j.datasource-tasklist.cfg" override="true">
+            mvn:org.codice.data/data-management-features/${project.version}/properties/datasource
+        </configfile>
     </feature>
 
     <feature name="data-management-client" version="${project.version}">

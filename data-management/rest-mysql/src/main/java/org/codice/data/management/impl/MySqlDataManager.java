@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 
 import org.codice.data.management.DataManager;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,8 +29,10 @@ public class MySqlDataManager implements DataManager {
 
     private DataSource dataSource;
 
-    public MySqlDataManager(DataSource dataSource) {
+    @Reference
+    public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
+        init();
     }
 
     public void init() {
@@ -58,7 +61,7 @@ public class MySqlDataManager implements DataManager {
 
     @Override
     public void insert(String key, String value) {
-        LOGGER.trace("Inserting Information");
+        LOGGER.trace("Inserting Information into {}.  Key {} Value {}", dataSource, key, value);
         try (Connection con = dataSource.getConnection(); Statement stmt = con.createStatement()) {
             stmt.execute(
                     "insert into " + TABLE_NAME + " (name, email) values ('" + key + "', '" + value

@@ -1,0 +1,6 @@
+Export-Package: \
+    org.apache.cxf.dosgi.samples.rest,\
+    org.codice.data.management
+Import-Package: \
+	javax.xml.bind.annotation,\
+	*

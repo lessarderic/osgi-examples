@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+          name="data-management-${project.version}">
+    <repository>mvn:org.apache.cxf.dosgi/cxf-dosgi/2.0.0/xml/features</repository>
+
+    <!-- feature:repo-add mvn:org.codice.data/data-management-features/0.1-SNAPSHOT/xml/features -->
+
+    <!-- Common -->
+    <feature name="data-management-common" version="${project.version}">
+        <feature>cxf-dosgi-provider-rs</feature>
+        <feature>aries-rsa-discovery-zookeeper-server</feature>
+        <bundle>mvn:org.codice.data/data-management-rest-api/${project.version}</bundle>
+    </feature>
+
+    <!-- Single container features -->
+    <feature name="data-management-text" version="${project.version}">
+        <feature>data-management-common</feature>
+        <bundle>mvn:org.codice.data/data-management-rest-text/${project.version}</bundle>
+    </feature>
+
+    <feature name="data-management-mysql" version="${project.version}">
+        <feature>data-management-common</feature>
+        <bundle>mvn:org.codice.data/data-management-rest-mysql/${project.version}</bundle>
+    </feature>
+
+    <feature name="data-management-client" version="${project.version}">
+        <feature>data-management-common</feature>
+        <bundle>mvn:org.codice.data/data-management-rest-client/${project.version}</bundle>
+    </feature>
+
+    <!-- Distributed features -->
+    <feature name="data-management-rest-text" version="${project.version}">
+        <feature>data-management-common</feature>
+        <bundle>mvn:org.codice.data/data-management-rest-text/${project.version}</bundle>
+    </feature>
+
+    <feature name="data-management-rest-mysql" version="${project.version}">
+        <feature>data-management-common</feature>
+        <bundle>mvn:org.codice.data/data-management-rest-mysql/${project.version}</bundle>
+    </feature>
+
+    <feature name="data-management-rest-client" version="${project.version}">
+        <feature>data-management-common</feature>
+        <bundle>mvn:org.codice.data/data-management-rest-client/${project.version}</bundle>
+    </feature>
+
+</features>
